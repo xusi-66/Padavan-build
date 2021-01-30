@@ -30,24 +30,23 @@ jobs:
         sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
         cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
-- name: Clone source code
-  run: |
-    git clone --depth=1 https://github.com/chongshengB/rt-n56u.git /opt/rt-n56u
-    cd /opt/rt-n56u/toolchain-mipsel
-    sh dl_toolchain.sh
-    mkdir -p /opt/images/
-    
-- name: Set Golang
-  run: |
-   cd /opt/hostedtoolcache/go
-   rm -rf /opt/hostedtoolcache/go/1.14.13
-   mv 1.15.6 1.14.13  
-    
-- name: Build Firmware
-  env:
-    TNAME: 360P2
-  run: |
-    cd /opt/rt-n56u/trunk
+    - name: Clone source code
+      run: |
+        git clone --depth=1 https://github.com/chongshengB/rt-n56u.git /opt/rt-n56u
+        cd /opt/rt-n56u/toolchain-mipsel
+        sh dl_toolchain.sh
+        mkdir -p /opt/images/
+
+           name: Set Golang
+           run: |
+           cd /opt/hostedtoolcache/go
+           rm -rf /opt/hostedtoolcache/go/1.14.12
+           mv 1.15.5 1.14.12
+    - name: Build Firmware
+      env:
+        TNAME: 360P2
+      run: |
+        cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
         echo "configs/templates/$TNAME.config not found "
         exit 1
