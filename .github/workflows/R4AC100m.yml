@@ -125,5 +125,5 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: Padavan-packages
+        name: MI-4A-100M
         path: /opt/images
