@@ -4,6 +4,7 @@ name: Build R3G
 on: 
   release:
     types: [published]
+    
   #push:
   #  branches: 
   #    - master
