@@ -4,15 +4,16 @@ name: Build R4AC100M
 on: 
   release:
     types: [published]
+    
   push:
-    tags:
-    - 'v*'
-  #  branches: 
-  #    - master
-#  schedule:
-#    - cron: 0 8 * * 5
-  watch:
-    types: [started]
+    branches: 
+      - master
+
+  #schedule:
+  #  - cron: 0 8 * * 5
+
+  #watch:
+  #  types: [started]
 
 jobs:
   build:
