@@ -58,20 +58,16 @@ jobs:
         ################################################################################################
         #因不同型号配置功能不一样，所以先把配置项删除，如果你自己要添加其他的，也要写上删除这一条，切记！！！
         ################################################################################################
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MENTOHUST=/d' .config #MENTOHUST
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_SERVER/d' .config #删除配置项SOFTETHERVPN
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT/d' .config #删除配置项SOFTETHERVPN
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CMD/d' .config #删除配置项SOFTETHERVPN 
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_MENTOHUST=/d' .config #MENTOHUST
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_ALDRIVER=/d' .config  #阿里云盘  ~3m
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_MENTOHUST=/d' .config #MENTOHUST
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=/d' .config #SCUTCLIENT
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=/d' .config #SCUTCLIENT 锐捷认证
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=/d' .config #SS plus+
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_SSOBFS=/d' .config # simple-obfs混淆插件
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SSSERVER=/d' .config #SS server
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=/d' .config #DNSFORWARDER
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=/d' .config #DNSFORWARDER       
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ADBYBY=/d' .config #adbyby plus+
         sed -i '/CONFIG_FIRMWARE_INCLUDE_FRPC=/d' .config #内网穿透FRPC
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_FRPS=/d' .config #内网穿透FRPS
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TUNSAFE=/d' .config #TUNSAFE
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ALIDDNS=/d' .config #阿里DDNS
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SMARTDNS=/d' .config #smartdns
@@ -80,12 +76,17 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TROJAN=/d' .config #集成trojan执行文件(1.1M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
         sed -i '/CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=/d' .config #KP广告过滤
         sed -i '/CONFIG_FIRMWARE_INCLUDE_CADDY=/d' .config #在线文件管理服务
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_CADDYBIN=/d' .config #集成caddu执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=/d' .config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_CADDYBIN=/d' .config #集成caddu执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用      
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=/d' .config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=/d' .config #去广告
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_IPT2SOCKS=/d' .config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MICROSOCKS=/d' .config        
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY=/d' .config #可以不集成
         sed -i '/CONFIG_FIRMWARE_INCLUDE_WYY=/d' .config #网易云解锁
         sed -i '/CONFIG_FIRMWARE_INCLUDE_WYYBIN=/d' .config #网易云解锁GO版本执行文件（4M多）注意固件超大小,不集成会自动下载
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ZEROTIER=/d' .config #zerotier ~1.3M
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_ALDRIVER=/d' .config  #阿里云盘  ~3m
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SSOBFS=/d' .config # simple-obfs混淆插件 
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/g' .config
         ######################################################################
         #以下选项是定义你需要的功能（y=集成,n=忽略），重新写入到.config文件
@@ -101,7 +102,6 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #DNSFORWARDER
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config #adbyby plus+
         echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config #内网穿透FRPC
-        echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config #内网穿透FRPS
         echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=n" >> .config #TUNSAFE
         echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=n" >> .config #阿里DDNS
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config
@@ -112,13 +112,15 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config #在线文件管理服务
         echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config #集成caddu执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=n" >> .config
-        echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #去广告
         echo "CONFIG_FIRMWARE_INCLUDE_IPT2SOCKS=n" >> .config
         echo "CONFIG_FIRMWARE_INCLUDE_MICROSOCKS=n" >> .config
-        echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >> .config
+        echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >> .config #可以不集成
         echo "CONFIG_FIRMWARE_INCLUDE_WYY=y" >> .config #网易云解锁
         echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config #网易云解锁GO版本执行文件（4M多）注意固件超大小
         echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=y" >> .config #zerotier ~1.3M
+        echo "CONFIG_FIRMWARE_INCLUDE_ALDRIVER=y" >> .config  #阿里云盘  ~3m
+        echo "CONFIG_FIRMWARE_INCLUDE_SSOBFS=y" >> .config # simple-obfs混淆插件 
         fi
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
